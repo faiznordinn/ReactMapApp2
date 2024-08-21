@@ -10,11 +10,19 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven { url 'https://developer.huawei.com/repo/' }
     }
     dependencies {
-        classpath("com.android.tools.build:gradle")
+        classpath("com.android.tools.build:gradle:8.0.2")
         classpath("com.facebook.react:react-native-gradle-plugin")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin")
+        classpath ('com.huawei.agconnect:agcp:1.5.2.300')
+    }
+}
+allprojects {
+    repositories {
+        // Add the Maven address.
+        maven {url 'https://developer.huawei.com/repo/'}
     }
 }
 

@@ -188,7 +188,7 @@ export default class MapLayers extends React.Component {
           />
           <HMSGroundOverlay
             image={{
-              asset: "ic_launcher.png", // under assets folder
+              asset: "map_icon.png", // under assets folder
               uri: Image.resolveAssetSource(
                 require("../assets/galata-tower.png")
               ).uri,

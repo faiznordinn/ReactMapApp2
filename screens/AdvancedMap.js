@@ -208,7 +208,7 @@ const GroundOverlaySimple = () => (
   <HMSGroundOverlay
     image={{
       // hue: 30.0,
-      asset: "ic_launcher.png", // under assets folder
+      asset: "map_icon.png", // under assets folder
       // path on the device
       // path:
       //   "/data/data/com.huawei.rnhmsmapdemo/files/map-style/img/native_dianhua_dire_arrow.png",
@@ -227,7 +227,7 @@ const MarkerComplex = (props) => (
     draggable={true}
     flat={true}
     icon={{
-      asset: "ic_launcher.png", // under assets folder
+      asset: "mao-icon.png", // under assets folder
     }}
     alpha={0.8}
     title="Complex Marker"

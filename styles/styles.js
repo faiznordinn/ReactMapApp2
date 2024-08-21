@@ -1,12 +1,12 @@
 /*
  * Copyright 2020-2023. Huawei Technologies Co., Ltd. All rights reserved.
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License")
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      https://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -17,6 +17,19 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
+buttonContainer: {
+  alignItems: 'center',
+},
+button: {
+  backgroundColor: '#3498db',
+  padding: 10,
+  borderRadius: 5,
+  marginTop: 10,
+},
+buttonText: {
+  color: 'white',
+},
+
   flexRow: { flexDirection: "row" },
   flexCol: { flexDirection: "column" },
   flex1: { flex: 1 },
@@ -51,4 +64,5 @@ export const styles = StyleSheet.create({
   m4: { margin: 4 },
   m8: { margin: 8 },
   m16: { margin: 16 },
+
 });

@@ -404,7 +404,7 @@ export default class Markers extends React.Component {
           markerClusterColor={[255, 230, 130, 0]}
           markerClusterTextColor={[200, 0, 0, 0]}
           markerClusterIcon={{
-            asset: "ic_launcher.png",
+            asset: "map_icon.png",
           }}
           style={styles.height200}
           mapType={MapTypes.NORMAL}

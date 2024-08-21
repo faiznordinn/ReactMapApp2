@@ -74,19 +74,19 @@ export default class MapStyle extends React.Component {
             x: 3,
             y: 4,
             zoom: 3,
-            asset: "ic_launcher.png",
+            asset: "map_icon.png",
           },
           {
             x: 4,
             y: 3,
             zoom: 3,
-            asset: "ic_launcher.png",
+            asset: "map_icon.png",
           },
           {
             x: 4,
             y: 4,
             zoom: 3,
-            asset: "ic_launcher.png",
+            asset: "map_icon.png",
           },
         ]}
         visible={this.state.showCustomTiles}

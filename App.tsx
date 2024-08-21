@@ -1,118 +1,125 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
-import React from 'react';
-import type {PropsWithChildren} from 'react';
+import React from "react";
 import {
   SafeAreaView,
-  ScrollView,
-  StatusBar,
   StyleSheet,
+  ScrollView,
   Text,
-  useColorScheme,
   View,
-} from 'react-native';
+  TouchableHighlight,
+  Alert
+} from "react-native";
+import HMSMap from "@hmscore/react-native-hms-map";
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+import BasicMap from "./screens/BasicMap";
+import CameraControl from "./screens/CameraControl";
+import Gestures from "./screens/Gestures";
+import Location from "./screens/Location";
+import MapLayers from "./screens/MapLayers";
+import MapStyle from "./screens/MapStyle";
+import Markers from "./screens/Markers";
+import AdvancedMap from "./screens/AdvancedMap";
+import HeatMap from "./screens/HeatMap";
+import DemoPage from "./screens/DemoPage";
+import { styles } from "./styles/styles";
 
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
+import { HmsPushInstanceId } from "@hmscore/react-native-hms-push";
 
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+const buttons = [
+  {
+    title: "Basic Map",
+    component: BasicMap,
+    description: "The most basic map component to show.",
+  },
+  {
+    title: "Camera Controls",
+    component: CameraControl,
+    description:
+      "Manipulate the camera via move, zoom, tilt, bearing. Animate the camera and stop the animation.",
+  },
+  {
+    title: "Markers",
+    component: Markers,
+    description:
+      "Show markers with default, colored and customized options. Show/hide default and customized info windows, animate markers, apply clustering. Add markers via long click and remove them via long click on ino window.",
+  },
+  {
+    title: "Map Styles",
+    component: MapStyle,
+    description:
+      "Show different ways how to style a map via mapType, mapStyle and tile overlay",
+  },
+];
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+export default class App extends React.Component {
+  state = {
+    currentScreen: buttons[0],
   };
 
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+  componentDidMount() {
+    HMSMap.module.initializer("DAEDAOD/iTXiwFOeCScoSWDCPIi6brd+phsOkZUsYR4cGjibISr2EU/JuNSmKINiQHcbpUoMkMxh+6N/LDd8emdzKB2J/Aa4w52tkQ==", "en-US");
+
+    // Get Push Token
+    HmsPushInstanceId.getToken("")
+      .then((result) => {
+        console.log("getToken", result);
+      })
+      .catch((err) => {
+        Alert.alert("[getToken] Error/Exception: " + JSON.stringify(err));
+        console.log("[getToken] Error/Exception: " + JSON.stringify(err));
+      });
+  }
+
+  renderButtons() {
+    return buttons.map((b) => (
+      <View
+        key={b.title}
+        style={[
+          styles.p4,
+          styles.m2,
+          this.state.currentScreen == b ? customStyle.buttonBorder : null,
+        ]}
+      >
+        <TouchableHighlight
+          onPress={() => {
+            this.setState({ currentScreen: b });
+          }}
+        >
+          <Text>{b.title}</Text>
+        </TouchableHighlight>
+      </View>
+    ));
+  }
+
+  renderScreen() {
+    const Map = this.state.currentScreen.component;
+    return <Map />;
+  }
+
+  render() {
+    return (
+      <SafeAreaView>
+        <View>
+          <ScrollView horizontal style={[styles.p4]}>
+            {this.renderButtons()}
+          </ScrollView>
         </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+
+        <View style={customStyle.lineStyle} />
+        {this.renderScreen()}
+      </SafeAreaView>
+    );
+  }
 }
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
+const customStyle = StyleSheet.create({
+  lineStyle: {
     marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+    borderBottomColor: "gray",
+    borderBottomWidth: 1,
   },
-  highlight: {
-    fontWeight: '700',
+  buttonBorder: {
+    borderColor: "black",
+    borderWidth: 1,
+    borderRadius: 5,
   },
 });
-
-export default App;
