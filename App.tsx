@@ -46,7 +46,7 @@ const buttons = [
     title: "Map Styles",
     component: MapStyle,
     description:
-      "Show different ways how to style a map via mapType, mapStyle and tile overlay",
+      "Show different ways show to style a map via mapType, mapStyle and tile overlay",
   },
 ];
 
